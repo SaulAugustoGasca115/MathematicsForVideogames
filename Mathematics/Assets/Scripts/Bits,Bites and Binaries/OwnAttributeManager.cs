@@ -36,9 +36,9 @@ public class OwnAttributeManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "MAGIC")
+        if (other.gameObject.tag == "MAGIC")
         {
-            attributes |= MAGIC;
+            attributes ^= MAGIC;
         }
         else if(other.gameObject.tag == "INTELLIGENCE")
         {
@@ -72,5 +72,7 @@ public class OwnAttributeManager : MonoBehaviour
         {
             attributes = 0;
         }
+
+        
     }
 }
