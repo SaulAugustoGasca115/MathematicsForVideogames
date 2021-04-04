@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankMovement : MonoBehaviour
 {
 
     public float speed = 10.0f;
     public float rotationSpeed = 100.0f;
+    public Text energyAmount;
+    public Vector3 currentLocation;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentLocation = this.transform.position;
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class TankMovement : MonoBehaviour
 
     void Movement()
     {
+        if (float.Parse(energyAmount.text) <= 0) return;
+
         //Get Horzintal and Vertical axis
         // By default they are mapped to the arrow keys.
         // The value is in the range -1 to 1
@@ -38,5 +43,9 @@ public class TankMovement : MonoBehaviour
 
         //Rotate around our y-axis
         transform.Rotate(0,0,-rotation);
+
+        energyAmount.text = (float.Parse(energyAmount.text) - Vector3.Distance(currentLocation, this.transform.position)).ToString();
+
+        currentLocation = this.transform.position;
     }
 }
