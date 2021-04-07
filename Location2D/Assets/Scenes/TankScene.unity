@@ -2556,7 +2556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019102504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.5, y: 12.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 100664040}
@@ -2627,6 +2627,7 @@ MonoBehaviour:
   speed: 16
   rotationSpeed: 100
   energyAmount: {fileID: 1381633293}
+  playerPosition: {fileID: 1125365415}
   currentLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &2034515969
 GameObject:

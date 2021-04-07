@@ -15,7 +15,9 @@ public class TestUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tankPosition.text = tank.transform.position.ToString();
+        //tankPosition.text = tank.transform.position.ToString();
+
+        tankPosition.text = tank.GetComponent<TestTankMovement>().currentLocation.ToString();
 
         fuelPosition.text = fuel.GetComponent<TestObjectManager>().fuelPosition.ToString();
     }

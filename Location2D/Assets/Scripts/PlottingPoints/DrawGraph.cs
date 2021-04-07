@@ -57,6 +57,7 @@ public class DrawGraph : MonoBehaviour
 
         for (int y = -yoffset * size; y <= yoffset *  size; y += size)
         {
+
             Coordinates.DrawLine(new Coordinates(-xmax, y), new Coordinates(xmax, y), 0.5f, Color.white);
         }
     }

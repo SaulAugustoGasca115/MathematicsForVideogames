@@ -8,6 +8,7 @@ public class TestTankMovement : MonoBehaviour
     public float speed = 16.0f;
     public float rotationSpeed = 100.0f;
     public Text energyAmount;
+    public Text playerPosition;
     public Vector3 currentLocation;
 
     // Start is called before the first frame update
@@ -20,6 +21,10 @@ public class TestTankMovement : MonoBehaviour
     void Update()
     {
         Movement();
+
+        //currentLocation = this.transform.position;
+
+        playerPosition.text = this.transform.position.ToString();
     }
 
     void Movement()
