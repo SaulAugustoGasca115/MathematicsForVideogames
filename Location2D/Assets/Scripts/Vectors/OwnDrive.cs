@@ -19,9 +19,16 @@ public class OwnDrive : MonoBehaviour
         //normal vector section
         NormalCoordinates directionNormal = HolisticMath.GetNormal(new NormalCoordinates(direction));
         direction = directionNormal.ToVector();
+        //Coordinates v = new Coordinates(direction.x,direction.y,direction.z);
+        //float angle = HolisticMath.Angle(new NormalCoordinates(0,1,0),new NormalCoordinates(direction)) *  180.0f / Mathf.PI; //ANGLE RADIANS TO DEGRESS
+        //Debug.Log("Angle from Tank to Fuel: " + angle);
 
-        float angle = HolisticMath.Angle(new NormalCoordinates(0,1,0),new NormalCoordinates(direction)) *  180.0f / Mathf.PI; //ANGLE RADIANS TO DEGRESS
-        Debug.Log("Angle from Tank to Fuel: " + angle);
+
+        //Rotate dirtection
+        float angle = HolisticMath.Angle(new NormalCoordinates(0,1,0),new NormalCoordinates(direction));
+        NormalCoordinates newRotationDirection = HolisticMath.Rotate(new NormalCoordinates(0,1,0),angle);
+
+        this.transform.up = new Vector3(newRotationDirection.x,newRotationDirection.y,newRotationDirection.z);
     }
 
     // Update is called once per frame

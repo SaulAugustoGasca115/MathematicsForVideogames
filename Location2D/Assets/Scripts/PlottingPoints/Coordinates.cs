@@ -8,12 +8,21 @@ public class Coordinates : MonoBehaviour
     float y;
     float z;
 
-    public Coordinates(float _X,float _Y)
+    public Coordinates(float _X, float _Y)
     {
         x = _X;
         y = _Y;
         z = -1;
     }
+
+    public Coordinates(float _X,float _Y,float _Z)
+    {
+        x = _X;
+        y = _Y;
+        z = _Z;
+    }
+
+    //public Coordinates(float x,)
 
     public override string ToString()
     {
