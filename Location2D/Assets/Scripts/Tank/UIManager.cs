@@ -99,6 +99,17 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void SetAngle(string amount)
+    {
+        float n;
+        if(float.TryParse(amount,out n))
+        {
+            n *= Mathf.PI / 180.0f;
+            //n *= Mathf.Deg2Rad;
+            tank.transform.up = HolisticMath.Rotate(new NormalCoordinates(tank.transform.up),n,false).ToVector();
+        }
+    }
+
 
    
 }

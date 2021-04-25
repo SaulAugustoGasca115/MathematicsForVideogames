@@ -14,17 +14,37 @@ public class TestNormalDrive : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        prefabPosition = prefabObject.GetComponent<OtherFuelManager>().objectPosition;
-        direction = prefabPosition - this.transform.position;
-        //Debug.Log("DIRECTION: " + direction);
-        TestNormalCoordinates normal =  TestOwnMathematics.GetNormal(new TestNormalCoordinates(direction));
-        direction = normal.ConvertToVector();
-        //Debug.Log("NORMAL DIRECTION" + direction);
+        //prefabPosition = prefabObject.GetComponent<OtherFuelManager>().objectPosition;
+        //direction = prefabPosition - this.transform.position;
+        ////Debug.Log("DIRECTION: " + direction);
+        //TestNormalCoordinates normal =  TestOwnMathematics.GetNormal(new TestNormalCoordinates(direction));
+        //direction = normal.ConvertToVector();
+        ////Debug.Log("NORMAL DIRECTION" + direction);
 
-       
 
-        float angle = TestOwnMathematics.Angle(new TestNormalCoordinates(0,1,0),new TestNormalCoordinates(direction)) * 180 / Mathf.PI;
-        Debug.Log("DOT PRODUCT ANGLE: " + angle);
+
+        ////float angle = TestOwnMathematics.Angle(new TestNormalCoordinates(0,1,0),new TestNormalCoordinates(direction)) * 180 / Mathf.PI;
+        ////Debug.Log("DOT PRODUCT ANGLE: " + angle);
+
+        ////The angle of Cross Product shuld be in radians no in degress
+        //float angleToCrossProduct = TestOwnMathematics.Angle(new TestNormalCoordinates(direction),new TestNormalCoordinates(this.transform.up));
+
+        //bool clockwise = false;
+
+        //if(TestOwnMathematics.Cross(new TestNormalCoordinates(this.transform.up),normal).z < 0)
+        //{
+        //    clockwise = true;
+        //}
+
+
+        //TestNormalCoordinates newRotationDirection = TestOwnMathematics.Rotate(new TestNormalCoordinates(this.transform.up),angleToCrossProduct,clockwise);
+
+        //this.transform.up = new Vector3(newRotationDirection.x, newRotationDirection.y, newRotationDirection.z);
+
+
+        //***LookAt2D section
+        this.transform.up = TestOwnMathematics.LookAt2D(new TestNormalCoordinates(this.transform.up),new TestNormalCoordinates(this.transform.position), new TestNormalCoordinates(prefabObject.GetComponent<OtherFuelManager>().objectPosition)).ConvertToVector();
+
     }
 
     // Update is called once per frame

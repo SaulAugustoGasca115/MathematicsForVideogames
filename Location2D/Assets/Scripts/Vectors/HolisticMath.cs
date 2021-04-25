@@ -65,13 +65,31 @@ public class HolisticMath
         return Mathf.Acos(dotDivide); //radians  //for degrees multiply * 180 / Mathf.PI;
     }
 
-    static public NormalCoordinates Rotate(NormalCoordinates vector,float angle) //angle in radians
+    static public NormalCoordinates Rotate(NormalCoordinates vector,float angle, bool clockwise) //angle in radians
     {
+
+        if(clockwise)
+        {
+            angle = 2 * Mathf.PI - angle; // this method works in radians and 2 * Math.PI is equal to 360 degress of a circle
+        }
+
+
         float xValue = vector.x * Mathf.Cos(angle) - vector.y * Mathf.Sin(angle);
 
         float yValue = vector.x * Mathf.Sin(angle) + vector.y * Mathf.Cos(angle);
 
         return new NormalCoordinates(xValue,yValue,0);
+    }
+
+    static public NormalCoordinates Cross(NormalCoordinates vector1,NormalCoordinates vector2)
+    {
+        float xCrossValue = vector1.y * vector2.z - vector1.z * vector2.y;
+        float yCrossValue = vector1.z * vector2.x - vector1.x * vector2.z;
+        float zCrossValue = vector1.x * vector2.y - vector1.y * vector2.x;
+
+        NormalCoordinates crossProduct = new NormalCoordinates(xCrossValue, yCrossValue, zCrossValue);
+
+        return crossProduct;
     }
 
 }

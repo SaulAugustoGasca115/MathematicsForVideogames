@@ -67,5 +67,47 @@ public class TestOwnMathematics : MonoBehaviour
         return angle; // radians /to convert radians to dregress * 180 / Mathf.PI;
     }
 
+    static public TestNormalCoordinates Rotate(TestNormalCoordinates vector,float angle,bool clockwise)
+    {
+        if(clockwise)
+        {
+            angle = 2 * Mathf.PI - angle;
+        }
+
+
+        float xRotationValue = vector.x * Mathf.Cos(angle) - vector.y * Mathf.Sin(angle);
+        float yRotationValue = vector.x * Mathf.Sin(angle) + vector.y * Mathf.Cos(angle);
+
+        return new TestNormalCoordinates(xRotationValue,yRotationValue,0);
+    }
+
+    static public TestNormalCoordinates Cross(TestNormalCoordinates vVector,TestNormalCoordinates wVector)
+    {
+        float xCrossValue = vVector.y * wVector.z - vVector.z * wVector.y;
+        float yCrossValue = vVector.z * wVector.x - vVector.x * wVector.z;
+        float zCrossValue = vVector.x * wVector.y - vVector.y * wVector.x;
+
+        return new TestNormalCoordinates(xCrossValue, yCrossValue, zCrossValue);
+    }
+
+
+    static public TestNormalCoordinates LookAt2D(TestNormalCoordinates forwardVector,TestNormalCoordinates position,TestNormalCoordinates focusPoint)
+    {
+        TestNormalCoordinates direction = new TestNormalCoordinates(focusPoint.x - position.x, focusPoint.y - position.y, position.z);
+        float angle = Angle(forwardVector, direction);
+
+        bool clockwise = false;
+
+        if(Cross(forwardVector,direction).z < 0 )
+        {
+            clockwise = true;
+        }
+
+        TestNormalCoordinates newRotationDirection = Rotate(forwardVector, angle, clockwise);
+
+        return newRotationDirection;
+
+    }
+
 
 }

@@ -25,8 +25,21 @@ public class OwnDrive : MonoBehaviour
 
 
         //Rotate dirtection
-        float angle = HolisticMath.Angle(new NormalCoordinates(0,1,0),new NormalCoordinates(direction));
-        NormalCoordinates newRotationDirection = HolisticMath.Rotate(new NormalCoordinates(0,1,0),angle);
+        //float angle = HolisticMath.Angle(new NormalCoordinates(0,1,0),new NormalCoordinates(direction));
+        float angle = HolisticMath.Angle(new NormalCoordinates(this.transform.up), new NormalCoordinates(direction));
+
+
+        bool clockwise = false;
+
+        if (HolisticMath.Cross(new NormalCoordinates(this.transform.up),directionNormal).z < 0)
+        {
+            clockwise = true;
+        }
+
+
+        //NormalCoordinates newRotationDirection = HolisticMath.Rotate(new NormalCoordinates(0,1,0),angle);
+
+        NormalCoordinates newRotationDirection = HolisticMath.Rotate(new NormalCoordinates(this.transform.up), angle, clockwise);
 
         this.transform.up = new Vector3(newRotationDirection.x,newRotationDirection.y,newRotationDirection.z);
     }
