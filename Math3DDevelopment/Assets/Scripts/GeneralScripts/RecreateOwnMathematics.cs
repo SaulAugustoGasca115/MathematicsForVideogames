@@ -87,6 +87,28 @@ public class RecreateOwnMathematics : MonoBehaviour
         return new RecreateCoordinates(xValue,yValue,zValue);
     }
 
+
+    //translate for matrix
+    public static RecreateCoordinates MatrixTranslate(RecreateCoordinates position,RecreateCoordinates vector)
+    {
+        float[] translateValues =
+        {
+            1,0,0,vector.x,
+            0,1,0,vector.y,
+            0,0,1,vector.z,
+            0,0,0,1
+        };
+
+        Matrix translateMatrix = new Matrix(4, 4, translateValues);
+
+        Matrix pos = new Matrix(4,1,position.AsFloats());
+
+        Matrix result = translateMatrix * pos;
+        return result.AsCoordinates();
+
+    }
+
+
     public static RecreateCoordinates CrossProduct(RecreateCoordinates vector1,RecreateCoordinates vector2)
     {
         float xCrossValue = vector1.y * vector2.z - vector1.z * vector2.y;
