@@ -108,6 +108,85 @@ public class RecreateOwnMathematics : MonoBehaviour
 
     }
 
+    public static RecreateCoordinates MatrixScale(RecreateCoordinates position,float scaleX,float scaleY,float scaleZ)
+    {
+        float[] scaleValues =
+        {
+            scaleX,0,0,0,
+            0,scaleY,0,0,
+            0,0,scaleZ,0,
+            0,0,0,1
+        };
+
+        Matrix scaleMatrix = new Matrix(4,4,scaleValues);
+
+        Matrix pos = new Matrix(4,1,position.AsFloats());
+
+        Matrix result = scaleMatrix * pos;
+
+        return result.AsCoordinates();
+
+
+    }
+
+    public static RecreateCoordinates MatrixRotate(RecreateCoordinates position,float angleX,bool clockwiseX,float angleY,bool clockwiseY,float angleZ,bool clockwiseZ)
+    {
+
+        if(clockwiseX)
+        {
+            angleX = 2 * Mathf.PI - angleX;
+        }
+
+        if(clockwiseY)
+        {
+            angleY = 2 * Mathf.PI - angleY;
+        }
+
+        if(clockwiseZ)
+        {
+            angleZ = 2 * Mathf.PI - angleZ;
+        }
+
+        float[] xRollValues =
+        {
+            1,0,0,0,
+            0,Mathf.Cos(angleX), -Mathf.Sin(angleX),0,
+            0,Mathf.Sin(angleX),Mathf.Cos(angleX),0,
+            0,0,0,1
+        };
+
+        Matrix xRoll = new Matrix(4, 4, xRollValues);
+
+        float[] yRollValues =
+        {
+            Mathf.Cos(angleY),0,Mathf.Sin(angleY),0,
+            0,1,0,0,
+            -Mathf.Sin(angleY),0,Mathf.Cos(angleY),0,
+            0,0,0,1
+        };
+
+        Matrix yRoll = new Matrix(4, 4, yRollValues);
+
+        float[] zRollValues =
+        {
+            Mathf.Cos(angleZ),-Mathf.Sin(angleZ),0,0,
+            Mathf.Sin(angleZ),Mathf.Cos(angleZ),0,0,
+            0,0,1,0,
+            0,0,0,1
+        };
+
+        Matrix zRoll = new Matrix(4,4,zRollValues);
+
+        Matrix pos = new Matrix(4,1,position.AsFloats());
+
+        Matrix result = zRoll * yRoll * xRoll * pos;
+
+        return result.AsCoordinates();
+
+
+    }
+
+
 
     public static RecreateCoordinates CrossProduct(RecreateCoordinates vector1,RecreateCoordinates vector2)
     {
